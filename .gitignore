@@ -1,0 +1,26 @@
+# Ignore virtual environment directories
+.venv/
+myenv/
+
+# Ignore Python bytecode files
+__pycache__/
+*.py[cod]
+
+# Ignore other common Python temporary files
+*.pyo
+*.pyd
+*.pyc
+
+# Ignore Jupyter Notebook checkpoints
+.ipynb_checkpoints/
+
+# Ignore model files and large binary files
+model.pkl
+*.h5
+*.pth
+
+# Ignore log files
+*.log
+
+# Ignore environment configuration files
+.env

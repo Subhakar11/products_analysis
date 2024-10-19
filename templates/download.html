@@ -1,0 +1,14 @@
+<!-- templates/download.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Download File</title>
+</head>
+<body>
+    <h1>File Processed!</h1>
+    <p>Your analysis is complete. Click the link below to download the Excel file:</p>
+    <a href="{{ url_for('download_file', filename=output_file) }}">Download product_analysis.xlsx</a>
+</body>
+</html>
