@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, send_file
+from flask import Flask, render_template, request, send_file, redirect, url_for
 import torch
 from transformers import Qwen2VLForConditionalGeneration, AutoProcessor
 from PIL import Image
@@ -29,18 +29,18 @@ fruits_vegetables_pattern = r"Type of fruit/vegetable: (.*)\n  - Freshness Index
 
 @app.route('/')
 def home():
-    return render_template('index.html')
+    return render_template('index.html', analysis_result=None)
 
 @app.route('/upload', methods=['POST'])
 def upload_file():
     if 'file' not in request.files:
         print("No file part in the request.")  # Debugging line
-        return 'No file part'
+        return redirect(url_for('home'))
     
     file = request.files['file']
     if file.filename == '':
         print("No file selected.")  # Debugging line
-        return 'No selected file'
+        return redirect(url_for('home'))
     
     if file:
         # Save uploaded file
@@ -55,10 +55,10 @@ def upload_file():
             return "An error occurred during image processing."
 
         # Generate Excel report using the output text
-        output_file = generate_excel(output_text)
+        generate_excel(output_text)
         
-        # Return generated file
-        return send_file(output_file, as_attachment=True, download_name="product_analysis.xlsx")
+        # Return the analysis result on the web page
+        return render_template('index.html', analysis_result=output_text)
 
 def process_image(image_path):
     try:
