@@ -150,5 +150,6 @@ def generate_excel(output_text):
     print(f"Excel file saved at {excel_path}")  # Debugging line
     return excel_path
 
+
 if __name__ == '__main__':
-    app.run(debug=False)
+    app.run(host='0.0.0.0', port=5000, debug=False)
